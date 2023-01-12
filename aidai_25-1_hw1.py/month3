@@ -13,6 +13,7 @@ dp = Dispatcher(bot=bot)
 async def start_handler(message: types.Message):
     await bot.send_message(chat_id=message.from_user.id,
                            text=f"доброго время суток{message.from_user.first_name}")
+                           
 async def start_handler(message: types.Message):
     if message.text.isdigit():
         await bot.send_message(chat_id=message.from_id, text=int(message)**2)
@@ -41,7 +42,13 @@ async  def quiz_1(message: types.Message):
         correct_option_id=3,
         explanation='у всех своё начало',
     )
-
+message_handler()
+async def echo(message: types.Message):
+    if message.text.isdigit():
+        await message.answer(int(message.text) ** 2)
+    else:
+        await bot.send_message(chat_id=message.from_user.id, text=message.text)
+        
 @dp.message_handler(commands=['breakfast'])
 async  def quiz_1(message: types.Message):
     question = 'что полезно есть на завтрак ?'
